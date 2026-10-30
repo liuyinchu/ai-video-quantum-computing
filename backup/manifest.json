@@ -1,0 +1,153 @@
+{
+  "schema": 1,
+  "root_directory": "ai-video-1030-astra",
+  "source_commit": "7e2be6bbc1efeb7f2181f9342a60c897de13653f",
+  "file_manifest_sha256": "1bb5996f201cadf0baf72f231acd39a1ca8ddd07ed297a21d8e69487bc63085e",
+  "archive": {
+    "name": "ai-video-1030-astra-full-20261030.tar.gz",
+    "bytes": 1391441920,
+    "sha256": "a6de3dc1a1078cdb69ac03179e329f701bd356c486d44fbcaf26152dd6ca5c2a"
+  },
+  "parts": [
+    {
+      "name": "project.tar.gz.part-aaaa",
+      "bytes": 50331648,
+      "sha256": "ac44a3eb9d0a2992063f2a8e94d21a1afaa0cbd3b6881444ac0c71834f8803ce"
+    },
+    {
+      "name": "project.tar.gz.part-aaab",
+      "bytes": 50331648,
+      "sha256": "95a4ffddac0f867e5b973f02debb9e048d62b67f0a4b8a8ec6f6d9e20901042b"
+    },
+    {
+      "name": "project.tar.gz.part-aaac",
+      "bytes": 50331648,
+      "sha256": "a5acce1bd6cfa388d11841752b38e06cdffc7efc459bcaf6c138cd14c85ac6e2"
+    },
+    {
+      "name": "project.tar.gz.part-aaad",
+      "bytes": 50331648,
+      "sha256": "f70c20eb053be44cedce62f5f07a952f721a8ff3d31a3c88c513414af6a76ee8"
+    },
+    {
+      "name": "project.tar.gz.part-aaae",
+      "bytes": 50331648,
+      "sha256": "29fad1bf69aec98b082d3d8a79f015f6e9fd743eb3406c0e03f8feb54a485d8c"
+    },
+    {
+      "name": "project.tar.gz.part-aaaf",
+      "bytes": 50331648,
+      "sha256": "d557880e0d05eda691542d1759a4a83bc5c4160e9daa55760ffdf3095304479b"
+    },
+    {
+      "name": "project.tar.gz.part-aaag",
+      "bytes": 50331648,
+      "sha256": "91a8a15b95b79192655e10f4d1670006136b85558522f084edfaa003b33fa2bc"
+    },
+    {
+      "name": "project.tar.gz.part-aaah",
+      "bytes": 50331648,
+      "sha256": "afc0e80bca680d457964da2da80d8b0538f25a88c0b519b1e7c575570512df85"
+    },
+    {
+      "name": "project.tar.gz.part-aaai",
+      "bytes": 50331648,
+      "sha256": "07ecde0995ea0286f522b8b2b8f7a8c4f8549a0a04535b2196a6c560f864a30e"
+    },
+    {
+      "name": "project.tar.gz.part-aaaj",
+      "bytes": 50331648,
+      "sha256": "7348e3016c40133fdaea3294ef3ebf079d1da5e67b60dd077894e45911097ad6"
+    },
+    {
+      "name": "project.tar.gz.part-aaak",
+      "bytes": 50331648,
+      "sha256": "8bf61f415db3ddce6e3aba1262543ddd7dec955ed1cfd4cb597871fb1b57584d"
+    },
+    {
+      "name": "project.tar.gz.part-aaal",
+      "bytes": 50331648,
+      "sha256": "37948315133be3604bbe75bb24c7dd4975bce328285a88476269577159c2d0cf"
+    },
+    {
+      "name": "project.tar.gz.part-aaam",
+      "bytes": 50331648,
+      "sha256": "aaace6ca922a43989a710d096bc872f551f110eb444ec6c89a3827d7d910c98b"
+    },
+    {
+      "name": "project.tar.gz.part-aaan",
+      "bytes": 50331648,
+      "sha256": "86a3e3c32adf94b5ed83d60a9c040dd4ed0ed6ab0bec10579372d923d2aa1582"
+    },
+    {
+      "name": "project.tar.gz.part-aaao",
+      "bytes": 50331648,
+      "sha256": "4fe876bada29a4f1219a9e8e5102174f1e5e3a9cc55964a6494718c7b8545f7f"
+    },
+    {
+      "name": "project.tar.gz.part-aaap",
+      "bytes": 50331648,
+      "sha256": "9fe0b7778cc70114a0327a6638d90d45905680ccdb2e2b630d1909594ff8cef9"
+    },
+    {
+      "name": "project.tar.gz.part-aaaq",
+      "bytes": 50331648,
+      "sha256": "852f8f08df67e27a5861c6ebe672e7f243f99852f76fd2d5301e49a22599d5b1"
+    },
+    {
+      "name": "project.tar.gz.part-aaar",
+      "bytes": 50331648,
+      "sha256": "bb4098b0e399783fe8eee2a9be48446ec62ef5843d9e0aefbcc660c8ad0cde1f"
+    },
+    {
+      "name": "project.tar.gz.part-aaas",
+      "bytes": 50331648,
+      "sha256": "321949d17080821a1ed1540ec2c992560bae7bb70be863b1fbef1f1f6c806f80"
+    },
+    {
+      "name": "project.tar.gz.part-aaat",
+      "bytes": 50331648,
+      "sha256": "9d58dcb75625b440253cad6a5da9a7af91712651c3bf99d9e21dbeee633c9551"
+    },
+    {
+      "name": "project.tar.gz.part-aaau",
+      "bytes": 50331648,
+      "sha256": "ddcecb0441e17d65b8037a92591b3edeb28827907de530fd510f93759a7348a5"
+    },
+    {
+      "name": "project.tar.gz.part-aaav",
+      "bytes": 50331648,
+      "sha256": "f83b86b4910e4471d601cfa9af98f4e6c688a4d0b205649cd75fe9b2abe33b55"
+    },
+    {
+      "name": "project.tar.gz.part-aaaw",
+      "bytes": 50331648,
+      "sha256": "6199300977f122a88a49295f295c78d6031291bcd3a5a101c217ec86fef9bcd6"
+    },
+    {
+      "name": "project.tar.gz.part-aaax",
+      "bytes": 50331648,
+      "sha256": "0ea52925f966dbb1d28b6c6365d9c5e7b618e65f6cf4181f6fa1126597033ae4"
+    },
+    {
+      "name": "project.tar.gz.part-aaay",
+      "bytes": 50331648,
+      "sha256": "f6c0a779043b457ae48ab1cc75c76a18feed7763da8013ec3a9fc0c525383841"
+    },
+    {
+      "name": "project.tar.gz.part-aaaz",
+      "bytes": 50331648,
+      "sha256": "564db1e54a75df7c9b34017e9a4ec628bfae634de526a7edb741ae067a6d48c8"
+    },
+    {
+      "name": "project.tar.gz.part-aaba",
+      "bytes": 50331648,
+      "sha256": "4ef25128560f9541f8ac722151778444f0b4474489d3ca2dbfc8d835278bbd93"
+    },
+    {
+      "name": "project.tar.gz.part-aabb",
+      "bytes": 32487424,
+      "sha256": "a253ed81568c4c37336d3de6f63d430ea03d60e9ad5b246e88b041ee8b102460"
+    }
+  ]
+}
