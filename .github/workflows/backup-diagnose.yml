@@ -1,0 +1,21 @@
+name: Read backup publication diagnostics
+on:
+  push:
+    branches: [backup/full-snapshot-20261030]
+    paths: [backup/diagnostic-trigger.txt]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Report failed publication command
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh run view 41068666482 --repo "$GH_REPO" --log-failed > failure.txt
+          cat failure.txt >> "$GITHUB_STEP_SUMMARY"
+          node -e 'const fs=require("fs");console.log("::notice title=Publication diagnostic::"+fs.readFileSync("failure.txt","utf8").replace(/%/g,"%25").replace(/\r/g,"").replace(/\n/g,"%0A"))'
+
