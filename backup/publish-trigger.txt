@@ -1,0 +1,1 @@
+Publish verified draft by its Release ID

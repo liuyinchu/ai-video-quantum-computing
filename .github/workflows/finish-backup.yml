@@ -1,0 +1,51 @@
+name: Publish verified backup draft
+on:
+  push:
+    branches: [backup/full-snapshot-20261030]
+    paths: [backup/publish-trigger.txt]
+permissions:
+  contents: write
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Verify uploaded assets and publish their existing draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          EXPECTED_BACKUP: '{"assets":[{"name":"ai-video-1030-astra-full-20261030.tar.gz","bytes":1391441920,"sha256":"a6de3dc1a1078cdb69ac03179e329f701bd356c486d44fbcaf26152dd6ca5c2a"},{"name":"quantum-computing.mp4","bytes":571816815,"sha256":"3b91d429ebb34acfe6d76378f352f9f75a34a6e10511e11b9f84e553473c4045"},{"name":"quantum-computing-source.zip","bytes":41597403,"sha256":"f07606c705e8fcb5a27dbc4d71a9152401c37e46443a0c31af05c7c877522675"},{"name":"file-manifest.json","bytes":150115,"sha256":"1bb5996f201cadf0baf72f231acd39a1ca8ddd07ed297a21d8e69487bc63085e"},{"name":"backup-manifest.json","bytes":5010,"sha256":"8fc2ca28c335d7cc9cddcceaa7fd634564ddf1460b3f66b9b08cfaa88efe9c95"}],"files":718,"bytes":1438017557,"source_commit":"7e2be6bbc1efeb7f2181f9342a60c897de13653f"}'
+        run: |
+          set -euo pipefail
+          tag=full-backup-20261030
+          gh api "repos/$GH_REPO/releases?per_page=100" > releases.json
+          release_id=$(node -e 'const fs=require("fs");const r=JSON.parse(fs.readFileSync("releases.json","utf8")).find(r=>r.tag_name==="full-backup-20261030");if(!r)throw new Error("Verified backup draft not found");process.stdout.write(String(r.id));')
+          gh api "repos/$GH_REPO/releases/$release_id" > release.json
+          mkdir -p metadata
+          gh release download "$tag" --repo "$GH_REPO" --pattern verification.json --pattern SHA256SUMS --dir metadata
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          const expected=JSON.parse(process.env.EXPECTED_BACKUP);
+          const release=JSON.parse(fs.readFileSync('release.json','utf8'));
+          const report=JSON.parse(fs.readFileSync('metadata/verification.json','utf8'));
+          const checksums=new Map(fs.readFileSync('metadata/SHA256SUMS','utf8').trim().split('\n').map(line=>{const m=line.match(/^([a-f0-9]{64})  (.+)$/);if(!m)throw new Error('Invalid checksum line');return [m[2],m[1]]}));
+          const check=(ok,message)=>{if(!ok)throw new Error(message)};
+          try {
+           for(const item of expected.assets){
+            const asset=release.assets.find(a=>a.name===item.name);
+            check(asset&&asset.state==='uploaded'&&asset.size===item.bytes,'Missing/wrong asset: '+item.name);
+            check(!asset.digest||asset.digest==='sha256:'+item.sha256,'GitHub digest mismatch: '+item.name);
+            check(checksums.get(item.name)===item.sha256,'Published checksum mismatch: '+item.name);
+           }
+           const bytes=fs.readFileSync('metadata/verification.json');
+           check(crypto.createHash('sha256').update(bytes).digest('hex')===checksums.get('verification.json'),'Verification report checksum mismatch');
+           check(report.passed&&report.git_fsck==='passed','Original Git restore verification did not pass');
+           check(report.original_files===expected.files&&report.original_bytes===expected.bytes,'Original file totals mismatch');
+           check(report.source_commit===expected.source_commit&&report.archive.sha256===expected.assets[0].sha256,'Original snapshot identity mismatch');
+           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'Verified uploaded full backup before publication:\n\n'+JSON.stringify(report,null,2)+'\n');
+           console.log('All uploaded backup assets and the full restore report are verified.');
+          } catch(error) {console.error('::error title=Release verification failed::'+String(error).replace(/\n/g,'%0A'));process.exit(1)}
+          
+          NODE
+          gh api --method PATCH "repos/$GH_REPO/releases/$release_id" -F draft=false --jq .html_url | tee -a "$GITHUB_STEP_SUMMARY"
+
