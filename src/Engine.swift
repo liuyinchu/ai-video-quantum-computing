@@ -87,6 +87,7 @@ func render(_ start:Int=0,_ end:Int?=nil)throws {
    var buf:CVPixelBuffer?;guard CVPixelBufferPoolCreatePixelBuffer(nil,adapter.pixelBufferPool!,&buf)==kCVReturnSuccess,let b=buf else{throw NSError(domain:"PixelBuffer",code:1)}
    CVPixelBufferLockBaseAddress(b,[])
    let c=CGContext(data:CVPixelBufferGetBaseAddress(b),width:W,height:H,bitsPerComponent:8,bytesPerRow:CVPixelBufferGetBytesPerRow(b),space:CGColorSpaceCreateDeviceRGB(),bitmapInfo:CGBitmapInfo.byteOrder32Little.rawValue|CGImageAlphaInfo.premultipliedFirst.rawValue)!
+   c.setFillColor(CGColor(gray:0,alpha:1));c.fill(CGRect(x:0,y:0,width:W,height:H))
    c.translateBy(x:0,y:CGFloat(H));c.scaleBy(x:1,y:-1)
    draw(c,story,timeline,Double(frame)/Double(fps))
    CVPixelBufferUnlockBaseAddress(b,[])

@@ -12,7 +12,7 @@
 <script>
 const video=document.querySelector('#film');let chapters=[];
 const fmt=t=>Math.floor(t/60).toString().padStart(2,'0')+':'+Math.floor(t%60).toString().padStart(2,'0');
-fetch('chapters.json').then(r=>r.json()).then(data=>{chapters=data;for(const [i,c] of data.entries()){let b=document.createElement('button');b.id='c'+i;let time=document.createElement('time');time.textContent=fmt(c.start);let label=document.createElement('span');label.textContent=c.title;b.append(time,label);b.onclick=()=>{video.currentTime=c.start;video.play()};document.querySelector('#chapters').append(b)}});
+fetch('chapters.json').then(r=>r.json()).then(data=>{chapters=data;for(const [i,c] of data.entries()){let b=document.createElement('button');b.id='c'+i;let time=document.createElement('time');time.textContent=fmt(c.start);let label=document.createElement('span');label.textContent=c.title;b.append(time,label);b.onclick=()=>{video.currentTime=c.start;video.play().catch(()=>{})};document.querySelector('#chapters').append(b)}});
 video.addEventListener('loadedmetadata',()=>document.querySelector('#duration').textContent='完整片长 '+fmt(video.duration)+' · 24 个场景');
 video.addEventListener('timeupdate',()=>{let i=chapters.findIndex((c,j)=>video.currentTime>=c.start&&(j===chapters.length-1||video.currentTime<chapters[j+1].start));if(i<0)return;document.querySelectorAll('#chapters button').forEach((b,j)=>b.classList.toggle('active',i===j));document.querySelector('#chapter').textContent=chapters[i].chapter;document.querySelector('#current').textContent=chapters[i].title});
 </script></html>

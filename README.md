@@ -72,3 +72,7 @@ src/edge-token.rb 是 edge-tts token 计算的 Ruby 适配，适用 LGPL-3.0。�
 ## 成片验证结果
 
 最终时长 598.3 秒；1920 × 1080；30 fps；H.264 视频与 AAC 音频。24 个章节均已从最终编码文件解码检查，174 条字幕顺序和范围检查通过；最终音频解码峰值约 -2.22 dBFS，削波样本为 0。完整记录见 output/validation.json 与 output/encoded-qc.json。
+
+## 重新打开观看页面
+
+在远端仓库运行 ruby -EUTF-8 src/serve.rb，可在远端 127.0.0.1:8765 提供观看页。通过 SSH 把本机 8765 端口转发到远端该端口后，打开 http://127.0.0.1:8765/ 。预览服务只监听回环地址；MP4 与工程文件始终保存在远端 output/。

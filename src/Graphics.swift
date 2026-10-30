@@ -96,9 +96,10 @@ func orbit(_ c:CGContext,_ cx:Double,_ cy:Double,_ r:Double,_ t:Double,_ color:C
 }
 func background()->CGImage {
  let c=CGContext(data:nil,width:W,height:H,bitsPerComponent:8,bytesPerRow:W*4,space:CGColorSpaceCreateDeviceRGB(),bitmapInfo:CGImageAlphaInfo.premultipliedLast.rawValue)!
+ c.setFillColor(CGColor(red:0.008,green:0.014,blue:0.037,alpha:1));c.fill(CGRect(x:0,y:0,width:W,height:H))
  let cs=CGColorSpaceCreateDeviceRGB()
  let g=CGGradient(colorsSpace:cs,colors:[CGColor(red:0.025,green:0.045,blue:0.09,alpha:1),CGColor(red:0.008,green:0.014,blue:0.037,alpha:1)] as CFArray,locations:[0,1])!
- c.drawLinearGradient(g,start:CGPoint(x:0,y:1080),end:CGPoint(x:1600,y:0),options:[])
+ c.drawLinearGradient(g,start:CGPoint(x:0,y:1080),end:CGPoint(x:1600,y:0),options:[.drawsBeforeStartLocation,.drawsAfterEndLocation])
  let blue=CGGradient(colorsSpace:cs,colors:[CGColor(red:0.04,green:0.25,blue:0.36,alpha:0.36),CGColor(red:0.03,green:0.12,blue:0.20,alpha:0)] as CFArray,locations:[0,1])!
  c.drawRadialGradient(blue,startCenter:CGPoint(x:1300,y:540),startRadius:0,endCenter:CGPoint(x:1300,y:540),endRadius:850,options:[])
  let purple=CGGradient(colorsSpace:cs,colors:[CGColor(red:0.20,green:0.06,blue:0.40,alpha:0.25),CGColor(red:0.10,green:0.02,blue:0.20,alpha:0)] as CFArray,locations:[0,1])!

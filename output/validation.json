@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T11:49:12Z",
+  "generated_at": "2026-10-30T11:53:18Z",
   "passed": true,
   "failures": [
 
@@ -25,7 +25,7 @@
   "encoded": {
     "decoded_audio_clipped_samples": 0,
     "decoded_audio_peak_dBFS": -2.2199765129845255,
-    "decoded_audio_rms_dBFS": -22.618495591843836,
+    "decoded_audio_rms_dBFS": -22.618495591049715,
     "decoded_audio_samples": 57430080,
     "decoded_scene_frames": 24,
     "frame_timestamps": [
@@ -57,5 +57,5 @@
     "passed": true
   },
   "voice": "zh-CN-YunxiNeural",
-  "video_sha256": "cc227d234df8e92c8961fb9d4f3de9721b2edc4fe7253e9a49e7bd3852e2003c"
+  "video_sha256": "3b91d429ebb34acfe6d76378f352f9f75a34a6e10511e11b9f84e553473c4045"
 }

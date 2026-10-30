@@ -1,7 +1,7 @@
 {
   "decoded_audio_clipped_samples" : 0,
   "decoded_audio_peak_dBFS" : -2.2199765129845255,
-  "decoded_audio_rms_dBFS" : -22.618495591843836,
+  "decoded_audio_rms_dBFS" : -22.618495591049715,
   "decoded_audio_samples" : 57430080,
   "decoded_scene_frames" : 24,
   "frame_timestamps" : [
