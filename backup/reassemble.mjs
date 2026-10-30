@@ -45,7 +45,7 @@ for(const entry of files.entries) {
 check(count===files.files&&bytes===files.bytes,'Original file count or total byte count mismatch');
 const head=execFileSync('git',['-C',root,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
 check(head===manifest.source_commit,'Original Git HEAD mismatch');
-execFileSync('git',['-C',root,'fsck','--full'],{stdio:'inherit'});
+console.log(execFileSync('git',['-C',root,'fsck','--full'],{encoding:'utf8',stdio:'pipe'}));
 fs.copyFileSync(path.join(root,'output/quantum-computing.mp4'),'dist/quantum-computing.mp4');
 fs.copyFileSync(path.join(root,'output/quantum-computing-source.zip'),'dist/quantum-computing-source.zip');
 fs.copyFileSync('backup/file-manifest.json','dist/file-manifest.json');
@@ -61,8 +61,8 @@ console.log(JSON.stringify(verification,null,2));
 
 
 } catch (error) {
- const message=String(error.stack||error).replace(/\r/g,'').replace(/\n/g,'%0A');
+ const message=(String(error.stack||error)+'\n'+String(error.stderr||'')).replace(/\r/g,'').replace(/\n/g,'%0A');
  console.error('::error title=Full backup validation failed::'+message);
- if(process.env.GITHUB_STEP_SUMMARY)fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'\nBackup validation failed:\n\n'+String(error.stack||error)+'\n');
+ if(process.env.GITHUB_STEP_SUMMARY)fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'\nBackup validation failed:\n\n'+String(error.stack||error)+'\n'+String(error.stderr||'')+'\n');
  process.exit(1);
 }
