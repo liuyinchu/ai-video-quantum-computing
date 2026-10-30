@@ -13,3 +13,7 @@ verification.json 记录 GitHub Actions 对全部原始文件及 Git 历史的�
 
 源码可直接从 main 分支获取；完整媒体与中间文件以 Release 快照为准。backup/full-snapshot-20261030 分支保留传输分块，按 backup/manifest.json 顺序串联可再次重组同一归档。
 
+
+## Linux 解压说明
+
+此 macOS 完整归档含有 AppleDouble（文件名以 ._ 开头）的元数据伴随条目，它们不属于原始工程文件清单。在 Linux 上可用 tar --exclude='*/._*' -xzf ai-video-1030-astra-full-20261030.tar.gz，避免把这些元数据文件当作 Git 引用或对象。macOS 的系统 tar 会自动恢复相应附加属性。云端校验先逐一验证全部原始文件，再从清单中的原始 .git 文件构建独立目录执行 git fsck；完整归档本身没有删减这些元数据。

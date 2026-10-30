@@ -6,7 +6,9 @@ if ! gh release view "$tag" --repo "$GH_REPO" >/dev/null 2>&1; then
  gh release create "$tag" --repo "$GH_REPO" --target "$source_commit" --draft --title "量子计算视频 · 完整工程备份（2026-10-30）" --notes-file backup/RELEASE.md
 fi
 gh release upload "$tag" dist/* --repo "$GH_REPO" --clobber
-gh api "repos/$GH_REPO/releases/tags/$tag" > release-response.json
+release_id=$(gh api "repos/$GH_REPO/releases?per_page=100" --jq ".[] | select(.tag_name == \"$tag\") | .id")
+[ -n "$release_id" ]
+gh api "repos/$GH_REPO/releases/$release_id" > release-response.json
 node --input-type=module <<'NODE'
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -21,7 +23,7 @@ for(const item of expected){
  console.log('Release upload confirmed: '+item.name);
 }
 NODE
-gh release edit "$tag" --repo "$GH_REPO" --draft=false
+gh api --method PATCH "repos/$GH_REPO/releases/$release_id" -F draft=false >/dev/null
 printf 'Verified Release: https://github.com/%s/releases/tag/%s\n' "$GH_REPO" "$tag" >> "$GITHUB_STEP_SUMMARY"
 cat dist/verification.json >> "$GITHUB_STEP_SUMMARY"
 

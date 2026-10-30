@@ -76,3 +76,13 @@ src/edge-token.rb 是 edge-tts token 计算的 Ruby 适配，适用 LGPL-3.0。�
 ## 重新打开观看页面
 
 在远端仓库运行 ruby -EUTF-8 src/serve.rb，可在远端 127.0.0.1:8765 提供观看页。通过 SSH 把本机 8765 端口转发到远端该端口后，打开 http://127.0.0.1:8765/ 。预览服务只监听回环地址；MP4 与工程文件始终保存在远端 output/。
+
+
+## 完整工程备份与下载
+
+[完整备份 Release](https://github.com/liuyinchu/ai-video-quantum-computing/releases/tag/full-backup-20261030) 包含完整工程快照、最终 MP4、可编辑源工程包、逐文件清单、SHA-256 校验和及恢复说明。
+
+完整快照包括原始 `.git` 历史以及被 `.gitignore` 排除的音频、视频、中间文件与构建日志，共 718 个原始文件。原始工程提交为 `7e2be6bbc1efeb7f2181f9342a60c897de13653f`。快照 SHA-256：`a6de3dc1a1078cdb69ac03179e329f701bd356c486d44fbcaf26152dd6ca5c2a`。
+
+云端已经验证分块、恢复后的原始文件及 Git 历史。跨平台恢复注意事项见 [backup/RESTORE.md](backup/RESTORE.md)，特别是 macOS AppleDouble 元数据在 Linux 上的处理方式。
+
