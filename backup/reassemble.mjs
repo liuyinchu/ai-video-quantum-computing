@@ -45,13 +45,24 @@ for(const entry of files.entries) {
 check(count===files.files&&bytes===files.bytes,'Original file count or total byte count mismatch');
 const head=execFileSync('git',['-C',root,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
 check(head===manifest.source_commit,'Original Git HEAD mismatch');
-console.log(execFileSync('git',['-C',root,'fsck','--full'],{encoding:'utf8',stdio:'pipe'}));
+const gitVerificationRoot=path.resolve('git-verified-original');
+fs.mkdirSync(gitVerificationRoot,{recursive:true});
+for(const entry of files.entries.filter(e=>e.path.startsWith('.git/'))) {
+ const destination=path.join(gitVerificationRoot,entry.path.slice(5));
+ if(entry.type==='directory')fs.mkdirSync(destination,{recursive:true});
+ else if(entry.type==='file'){
+  fs.mkdirSync(path.dirname(destination),{recursive:true});
+  fs.copyFileSync(path.join(root,entry.path),destination);
+  check(await digest(destination)===entry.sha256,'Git verification copy mismatch: '+entry.path);
+ } else throw new Error('Unexpected original Git symlink: '+entry.path);
+}
+console.log(execFileSync('git',['--git-dir='+gitVerificationRoot,'fsck','--full'],{encoding:'utf8',stdio:'pipe'}));
 fs.copyFileSync(path.join(root,'output/quantum-computing.mp4'),'dist/quantum-computing.mp4');
 fs.copyFileSync(path.join(root,'output/quantum-computing-source.zip'),'dist/quantum-computing-source.zip');
 fs.copyFileSync('backup/file-manifest.json','dist/file-manifest.json');
 fs.copyFileSync('backup/manifest.json','dist/backup-manifest.json');
 fs.copyFileSync('backup/RESTORE.md','dist/RESTORE.md');
-const verification={verified_at:new Date().toISOString(),passed:true,original_files:count,original_bytes:bytes,source_commit:head,archive:manifest.archive,parts_verified:manifest.parts.length,git_fsck:'passed'};
+const verification={verified_at:new Date().toISOString(),passed:true,original_files:count,original_bytes:bytes,source_commit:head,archive:manifest.archive,parts_verified:manifest.parts.length,git_fsck:'passed',git_fsck_scope:'Exact original .git files from the verified manifest; archive-generated AppleDouble metadata sidecars are not Git objects'};
 fs.writeFileSync('dist/verification.json',JSON.stringify(verification,null,2)+'\n');
 const artifacts=[];
 for(const name of fs.readdirSync('dist').sort())artifacts.push({name,bytes:fs.statSync('dist/'+name).size,sha256:await digest('dist/'+name)});
