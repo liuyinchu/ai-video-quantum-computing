@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-10-30T11:49:12Z",
+  "passed": true,
+  "failures": [
+
+  ],
+  "chapters": 24,
+  "narration_clips": 71,
+  "subtitle_cues": 174,
+  "audio": {
+    "clipped_samples": 0,
+    "duration_seconds": 598.275,
+    "narration_clips": 71,
+    "peak_dBFS": -2.268646316571386,
+    "rms_dBFS": -22.617071671306416,
+    "sample_rate": 48000
+  },
+  "video": {
+    "audio_tracks": 1,
+    "duration_seconds": 598.3,
+    "fps": 30,
+    "height": 1080,
+    "width": 1920
+  },
+  "encoded": {
+    "decoded_audio_clipped_samples": 0,
+    "decoded_audio_peak_dBFS": -2.2199765129845255,
+    "decoded_audio_rms_dBFS": -22.618495591843836,
+    "decoded_audio_samples": 57430080,
+    "decoded_scene_frames": 24,
+    "frame_timestamps": [
+      7,
+      27.966666666666665,
+      51.3,
+      77.53333333333333,
+      101.46666666666667,
+      123.03333333333333,
+      148.66666666666666,
+      173.4,
+      196.9,
+      221.63333333333333,
+      244.5,
+      269.26666666666665,
+      296.7,
+      324.3666666666667,
+      348.7,
+      374.96666666666664,
+      401.96666666666664,
+      429.43333333333334,
+      458.46666666666664,
+      487.1666666666667,
+      514.6333333333333,
+      540.9,
+      566.0666666666667,
+      584.4
+    ],
+    "passed": true
+  },
+  "voice": "zh-CN-YunxiNeural",
+  "video_sha256": "cc227d234df8e92c8961fb9d4f3de9721b2edc4fe7253e9a49e7bd3852e2003c"
+}

@@ -1,0 +1,15 @@
+build/
+assets/audio/
+output/*.mp4
+output/*.mov
+output/*.wav
+output/*.m4a
+output/previews/
+output/contact-sheet.jpg
+.DS_Store
+
+assets/yunxi/
+output/poster.png
+output/*.zip
+
+output/verified/
